@@ -1,17 +1,13 @@
 import "./CalorieRecord.css";
 
-function CalorieRecord() {
-  const recordDate = new Date();
-  const meal = "Breakfast";
-  const content = "Molasses and Tahina";
-  const calories = 340;
+function CalorieRecord(props) {
   return (
     <>
       <ul className="record">
-        <li>{recordDate.toLocaleDateString()}</li>
-        <li>{meal}</li>
-        <li>{content}</li>
-        <li className="record-calories">{calories}</li>
+        <li>{props.date}</li>
+        <li>{props.meal}</li>
+        <li>{props.content}</li>
+        <li className="record-calories">{props.calories}</li>
       </ul>
     </>
   );
