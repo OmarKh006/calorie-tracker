@@ -11,7 +11,7 @@ function App() {
       ></CalorieRecord>
       <CalorieRecord
         date={new Date(2026, 3, 5)}
-        meal={"Lucnh"}
+        meal={"Lunch"}
         content={"Kabsa"}
         calories={1000}
       ></CalorieRecord>
