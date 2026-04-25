@@ -6,7 +6,7 @@ function CalorieRecord(props) {
     <>
       <ul className="record">
         <li>
-          <DateRecord date={props.date}></DateRecord>
+          <DateRecord date={props.date} />
         </li>
         <li>{props.meal}</li>
         <li>{props.content}</li>

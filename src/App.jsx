@@ -8,19 +8,19 @@ function App() {
         meal={"Breakfast"}
         content={"Omlette + bread"}
         calories={600}
-      ></CalorieRecord>
+      />
       <CalorieRecord
         date={new Date(2026, 3, 5)}
-        meal={"Lunch"}
+        meal={"Lucnh"}
         content={"Kabsa"}
         calories={1000}
-      ></CalorieRecord>
+      />
       <CalorieRecord
         date={new Date(2026, 3, 20)}
         meal={"Dinner"}
         content={"Yoghurt"}
         calories={200}
-      ></CalorieRecord>
+      />
     </>
   );
 }

@@ -4,11 +4,12 @@
   list-style: none;
   display: flex;
   color: #666;
-  justify-content: space-between;
-  padding: 0 60px;
-  height: 40px;
+  justify-content: space-around;
+  padding: 5px 0;
+  height: auto;
   align-items: center;
   background-color: antiquewhite;
+  width: 100%;
 }
 
 .record-calories {
