@@ -7,12 +7,12 @@ function CalorieRecord(props) {
     <>
       <ul className="record">
         <li>
-          <DateRecord date={props.date} />
+          <DateRecord date={props.record.date} />
         </li>
-        <li>{props.meal}</li>
-        <li>{props.content}</li>
+        <li>{props.record.meal}</li>
+        <li>{props.record.content}</li>
         <li className="record-calories">
-          <StyledRecordCell>{props.calories}</StyledRecordCell>
+          <StyledRecordCell>{props.record.calories}</StyledRecordCell>
         </li>
       </ul>
     </>

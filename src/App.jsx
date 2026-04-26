@@ -1,26 +1,40 @@
-import CalorieRecord from "./components/CalorieRecord";
+import RecordList from "./components/RecordList";
 
 function App() {
+  const records = [
+    {
+      id: 0,
+      date: new Date(2026, 3, 1),
+      meal: "Breakfast",
+      content: "Omlette",
+      calories: 300,
+    },
+    {
+      id: 1,
+      date: new Date(2026, 3, 3),
+      meal: "Lunch",
+      content: "Chicken",
+      calories: 500,
+    },
+    {
+      id: 2,
+      date: new Date(2026, 3, 5),
+      meal: "Dinner",
+      content: "Yoghurt",
+      calories: 100,
+    },
+    {
+      id: 3,
+      date: new Date(2026, 3, 26),
+      meal: "Snacks",
+      content: "Banana",
+      calories: 300,
+    },
+  ];
+
   return (
     <>
-      <CalorieRecord
-        date={new Date(2026, 3, 1)}
-        meal={"Breakfast"}
-        content={"Omlette + bread"}
-        calories={600}
-      />
-      <CalorieRecord
-        date={new Date(2026, 3, 5)}
-        meal={"Lucnh"}
-        content={"Kabsa"}
-        calories={1000}
-      />
-      <CalorieRecord
-        date={new Date(2026, 3, 20)}
-        meal={"Dinner"}
-        content={"Yoghurt"}
-        calories={200}
-      />
+      <RecordList records={records}></RecordList>
     </>
   );
 }
