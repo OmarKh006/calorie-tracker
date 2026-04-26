@@ -1,5 +1,6 @@
 import "./CalorieRecord.css";
 import DateRecord from "./DateRecord";
+import StyledRecordCell from "./StyledRecordCell";
 
 function CalorieRecord(props) {
   return (
@@ -10,7 +11,9 @@ function CalorieRecord(props) {
         </li>
         <li>{props.meal}</li>
         <li>{props.content}</li>
-        <li className="record-calories">{props.calories}</li>
+        <li className="record-calories">
+          <StyledRecordCell>{props.calories}</StyledRecordCell>
+        </li>
       </ul>
     </>
   );
