@@ -1,5 +1,5 @@
 import "./DateRecord.css";
-import StyledRecordCell from "./StyledRecordCell";
+import StyledRecordCell from "../common/StyledRecordCell";
 
 function DateRecord(props) {
   const formatDate = (inputDate) => {

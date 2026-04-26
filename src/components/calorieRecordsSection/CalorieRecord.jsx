@@ -1,6 +1,6 @@
 import "./CalorieRecord.css";
 import DateRecord from "./DateRecord";
-import StyledRecordCell from "./StyledRecordCell";
+import StyledRecordCell from "../common/StyledRecordCell";
 
 function CalorieRecord(props) {
   return (

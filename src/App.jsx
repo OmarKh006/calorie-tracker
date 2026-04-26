@@ -1,4 +1,4 @@
-import RecordList from "./components/RecordList";
+import RecordList from "./components/calorieRecordsSection/RecordList";
 
 function App() {
   const records = [
