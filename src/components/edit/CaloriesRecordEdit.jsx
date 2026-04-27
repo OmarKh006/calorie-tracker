@@ -2,35 +2,39 @@ import { useState } from "react";
 import "./CaloriesRecordEdit.css";
 
 export default function CaloriesRecordEdit() {
-  const [dateValue, setDateValue] = useState();
-  const [mealValue, setMealValue] = useState();
-  const [contentValue, setContentValue] = useState();
-  const [caloriesValue, setCaloriesValue] = useState();
+  const [mealRecord, setMealRecord] = useState({});
 
   const onDateChange = (event) => {
-    setDateValue(event.target.value);
+    setMealRecord({
+      ...mealRecord,
+      date: event.target.value,
+    });
   };
 
   const onMealChange = (event) => {
-    setMealValue(event.target.value);
+    setMealRecord({
+      ...mealRecord,
+      meal: event.target.value,
+    });
   };
 
   const onContentChange = (event) => {
-    setContentValue(event.target.value);
+    setMealRecord({
+      ...mealRecord,
+      content: event.target.value,
+    });
   };
 
   const onCaloriesChange = (event) => {
-    setCaloriesValue(event.target.value);
+    setMealRecord({
+      ...mealRecord,
+      calories: event.target.value,
+    });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log({
-      dateValue,
-      mealValue,
-      contentValue,
-      caloriesValue,
-    });
+    console.log(mealRecord);
   };
 
   return (
