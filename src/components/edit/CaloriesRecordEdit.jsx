@@ -2,7 +2,13 @@ import { useState } from "react";
 import "./CaloriesRecordEdit.css";
 
 export default function CaloriesRecordEdit() {
-  const [mealRecord, setMealRecord] = useState({});
+  const DEFAULT_VALUE = {
+    date: "",
+    meal: "",
+    content: "",
+    calories: 0,
+  };
+  const [mealRecord, setMealRecord] = useState(DEFAULT_VALUE);
 
   const onDateChange = (event) => {
     setMealRecord({
@@ -35,15 +41,26 @@ export default function CaloriesRecordEdit() {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     console.log(mealRecord);
+    setMealRecord({
+      date: "",
+      meal: "",
+      content: "",
+      calories: 0,
+    });
   };
 
   return (
     <form onSubmit={onSubmitHandler}>
       <label htmlFor="date">Date: </label>
-      <input type="date" id="date" onChange={onDateChange} />
+      <input
+        type="date"
+        id="date"
+        value={mealRecord.date}
+        onChange={onDateChange}
+      />
 
       <label htmlFor="meal">Meal: </label>
-      <select id="meal" onChange={onMealChange}>
+      <select id="meal" value={mealRecord.meal} onChange={onMealChange}>
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
@@ -51,10 +68,20 @@ export default function CaloriesRecordEdit() {
       </select>
 
       <label htmlFor="content">Content: </label>
-      <input type="text" id="content" onChange={onContentChange} />
+      <input
+        type="text"
+        id="content"
+        value={mealRecord.content}
+        onChange={onContentChange}
+      />
 
       <label htmlFor="calories">Calories: </label>
-      <input type="number" id="calories" onChange={onCaloriesChange} />
+      <input
+        type="number"
+        id="calories"
+        value={mealRecord.calories}
+        onChange={onCaloriesChange}
+      />
 
       <div className="footer">
         <button>Add Record</button>
