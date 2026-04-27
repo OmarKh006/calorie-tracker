@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./CaloriesRecordEdit.css";
 
-export default function CaloriesRecordEdit() {
+export default function CaloriesRecordEdit(props) {
   const DEFAULT_VALUE = {
     date: "",
     meal: "",
@@ -40,13 +40,8 @@ export default function CaloriesRecordEdit() {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(mealRecord);
-    setMealRecord({
-      date: "",
-      meal: "",
-      content: "",
-      calories: 0,
-    });
+    props.onFormSubmit(mealRecord);
+    setMealRecord(DEFAULT_VALUE);
   };
 
   return (

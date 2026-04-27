@@ -33,9 +33,13 @@ function App() {
     },
   ];
 
+  const formSubmit = (record) => {
+    console.log(record);
+  };
+
   return (
     <>
-      <CaloriesRecordEdit />
+      <CaloriesRecordEdit onFormSubmit={formSubmit} />
       <RecordList records={records}></RecordList>
     </>
   );
