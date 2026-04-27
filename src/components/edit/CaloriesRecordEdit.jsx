@@ -1,8 +1,18 @@
 import "./CaloriesRecordEdit.css";
 
 export default function CaloriesRecordEdit() {
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log({
+      date: event.target[0].value,
+      meal: event.target[1].value,
+      content: event.target[2].value,
+      calories: event.target[3].value,
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmitHandler}>
       <label htmlFor="date">Date: </label>
       <input type="date" name="date" id="date" />
 
