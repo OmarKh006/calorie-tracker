@@ -6,8 +6,8 @@ export default function RecordList(props) {
     <ul className="record-list">
       {props.records.map((record) => {
         return (
-          <li>
-            <CalorieRecord key={record.id} record={record}></CalorieRecord>
+          <li key={record.id}>
+            <CalorieRecord record={record}></CalorieRecord>
           </li>
         );
       })}

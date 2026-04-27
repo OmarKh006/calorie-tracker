@@ -1,13 +1,13 @@
+import { useState } from "react";
+
 import "./CalorieRecord.css";
 import DateRecord from "./DateRecord";
 import StyledRecordCell from "../common/StyledRecordCell";
 
 function CalorieRecord(props) {
-  let currentCalories = props.record.calories;
+  const [currentCalories, setCurrentCalories] = useState(props.record.calories);
   const calorieIncrement = () => {
-    console.log("event is working");
-    currentCalories += 10;
-    console.log(currentCalories);
+    setCurrentCalories(currentCalories + 10);
   };
   return (
     <>
