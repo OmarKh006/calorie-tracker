@@ -1,4 +1,5 @@
 import RecordList from "./components/calorieRecordsSection/RecordList";
+import CaloriesRecordEdit from "./components/edit/CaloriesRecordEdit";
 
 function App() {
   const records = [
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <>
+      <CaloriesRecordEdit />
       <RecordList records={records}></RecordList>
     </>
   );
