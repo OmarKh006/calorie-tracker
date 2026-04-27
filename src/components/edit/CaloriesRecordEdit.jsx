@@ -1,23 +1,45 @@
+import { useState } from "react";
 import "./CaloriesRecordEdit.css";
 
 export default function CaloriesRecordEdit() {
+  const [dateValue, setDateValue] = useState();
+  const [mealValue, setMealValue] = useState();
+  const [contentValue, setContentValue] = useState();
+  const [caloriesValue, setCaloriesValue] = useState();
+
+  const onDateChange = (event) => {
+    setDateValue(event.target.value);
+  };
+
+  const onMealChange = (event) => {
+    setMealValue(event.target.value);
+  };
+
+  const onContentChange = (event) => {
+    setContentValue(event.target.value);
+  };
+
+  const onCaloriesChange = (event) => {
+    setCaloriesValue(event.target.value);
+  };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
     console.log({
-      date: event.target[0].value,
-      meal: event.target[1].value,
-      content: event.target[2].value,
-      calories: event.target[3].value,
+      dateValue,
+      mealValue,
+      contentValue,
+      caloriesValue,
     });
   };
 
   return (
     <form onSubmit={onSubmitHandler}>
       <label htmlFor="date">Date: </label>
-      <input type="date" name="date" id="date" />
+      <input type="date" id="date" onChange={onDateChange} />
 
       <label htmlFor="meal">Meal: </label>
-      <select name="meal" id="meal">
+      <select id="meal" onChange={onMealChange}>
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
@@ -25,10 +47,10 @@ export default function CaloriesRecordEdit() {
       </select>
 
       <label htmlFor="content">Content: </label>
-      <input type="text" name="content" id="content" />
+      <input type="text" id="content" onChange={onContentChange} />
 
       <label htmlFor="calories">Calories: </label>
-      <input type="number" name="calories" id="calories" />
+      <input type="number" id="calories" onChange={onCaloriesChange} />
 
       <div className="footer">
         <button>Add Record</button>
