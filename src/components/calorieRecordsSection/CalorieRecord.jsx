@@ -15,11 +15,17 @@ function CalorieRecord(props) {
         <li>
           <DateRecord date={props.record.date} />
         </li>
-        <li>{props.record.meal}</li>
-        <li>{props.record.content}</li>
-        <li className="record-calories" onClick={calorieIncrement}>
-          <StyledRecordCell>{currentCalories}</StyledRecordCell>
-        </li>
+        {currentCalories > 0 ? (
+          <>
+            <li>{props.record.meal}</li>
+            <li>{props.record.content}</li>
+            <li className="record-calories" onClick={calorieIncrement}>
+              <StyledRecordCell>{currentCalories}</StyledRecordCell>
+            </li>
+          </>
+        ) : (
+          <li>Invalid Record</li>
+        )}
       </ul>
     </>
   );
