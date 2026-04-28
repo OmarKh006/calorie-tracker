@@ -1,5 +1,69 @@
 import { useState } from "react";
-import "./CaloriesRecordEdit.css";
+import styled from "styled-components";
+
+const Form = styled.form`
+  background-color: #d4e0ff;
+  padding: 20px;
+  border-radius: 10px;
+
+  .footer {
+    display: flex;
+  }
+
+  .footer button {
+    background-color: white;
+    color: #012367;
+    display: block;
+    border: 3px solid #012367;
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+  }
+`;
+
+const Label = styled.label`
+  color: #333;
+  margin-right: 30px;
+  margin-bottom: 10px;
+`;
+
+const Input = styled.input`
+  &[type="number"],
+  &[type="date"],
+  &[type="text"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    min-width: 255px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  &#calories {
+    border: ${(props) => props.caloriesCount < 0 && "2px solid red"};
+    background-color: ${(props) => props.caloriesCount < 0 && "white"};
+    color: ${(props) => props.caloriesCount < 0 && "red"};
+  }
+`;
+
+const Select = styled.select`
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  min-width: 255px;
+  margin-bottom: 20px;
+  display: block;
+  box-sizing: border-box;
+`;
 
 export default function CaloriesRecordEdit(props) {
   const DEFAULT_VALUE = {
@@ -45,35 +109,36 @@ export default function CaloriesRecordEdit(props) {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <label htmlFor="date">Date: </label>
-      <input
+    <Form onSubmit={onSubmitHandler}>
+      <Label htmlFor="date">Date: </Label>
+      <Input
         type="date"
         id="date"
         value={mealRecord.date}
         onChange={onDateChange}
       />
 
-      <label htmlFor="meal">Meal: </label>
-      <select id="meal" value={mealRecord.meal} onChange={onMealChange}>
+      <Label htmlFor="meal">Meal: </Label>
+      <Select id="meal" value={mealRecord.meal} onChange={onMealChange}>
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
         <option value="Snacks">Snacks</option>
-      </select>
+      </Select>
 
-      <label htmlFor="content">Content: </label>
-      <input
+      <Label htmlFor="content">Content: </Label>
+      <Input
         type="text"
         id="content"
         value={mealRecord.content}
         onChange={onContentChange}
       />
 
-      <label htmlFor="calories">Calories: </label>
-      <input
+      <Label htmlFor="calories">Calories: </Label>
+      <Input
         type="number"
         id="calories"
+        $caloriesCount={mealRecord.calories}
         value={mealRecord.calories}
         onChange={onCaloriesChange}
         className={mealRecord.calories < 0 ? "error" : ""}
@@ -82,6 +147,6 @@ export default function CaloriesRecordEdit(props) {
       <div className="footer">
         <button>Add Record</button>
       </div>
-    </form>
+    </Form>
   );
 }
