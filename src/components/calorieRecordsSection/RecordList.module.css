@@ -1,9 +1,9 @@
 .record-list {
   list-style: none;
   padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  border: 1px solid var(--theme-color-light);
+  border-radius: 15px;
 }
-.list-item {
-  margin: 10px;
+.list-item:not(:last-child) {
+  border-bottom: 1px solid var(--theme-color-normal);
 }

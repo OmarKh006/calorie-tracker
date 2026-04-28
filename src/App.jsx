@@ -8,7 +8,7 @@ const INITIAL_RECORDS = [
     date: new Date(2026, 3, 1),
     meal: "Breakfast",
     content: "Omlette",
-    calories: -300,
+    calories: 300,
   },
   {
     id: 1,
