@@ -46,7 +46,7 @@ export default function CaloriesRecordEdit(props) {
 
   return (
     <form className={styles.form} onSubmit={onSubmitHandler}>
-      <label htmlFor="date">Date: </label>
+      <label htmlFor="date">Date:</label>
       <input
         type="date"
         id="date"
@@ -54,7 +54,7 @@ export default function CaloriesRecordEdit(props) {
         onChange={onDateChange}
       />
 
-      <label htmlFor="meal">Meal: </label>
+      <label htmlFor="meal">Meal:</label>
       <select id="meal" value={mealRecord.meal} onChange={onMealChange}>
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
@@ -62,7 +62,7 @@ export default function CaloriesRecordEdit(props) {
         <option value="Snacks">Snacks</option>
       </select>
 
-      <label htmlFor="content">Content: </label>
+      <label htmlFor="content">Content:</label>
       <input
         type="text"
         id="content"
@@ -70,7 +70,7 @@ export default function CaloriesRecordEdit(props) {
         onChange={onContentChange}
       />
 
-      <label htmlFor="calories">Calories: </label>
+      <label htmlFor="calories">Calories:</label>
       <input
         type="number"
         id="calories"

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import RecordList from "./components/calorieRecordsSection/RecordList";
 import CaloriesRecordEdit from "./components/edit/CaloriesRecordEdit";
+import ListingSection from "./components/calorieRecordsSection/ListingSection";
 
 const INITIAL_RECORDS = [
   {
@@ -45,13 +45,12 @@ function App() {
     };
     setRecords((prevRecord) => [formattedRecord, ...prevRecord]);
     setNextID((previous) => previous + 1);
-    console.log(record);
   };
 
   return (
     <>
       <CaloriesRecordEdit onFormSubmit={formSubmit} />
-      <RecordList records={records}></RecordList>
+      <ListingSection allRecords={records} />
     </>
   );
 }
