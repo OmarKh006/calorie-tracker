@@ -2,8 +2,19 @@
   list-style: none;
   padding: 0;
   border: 1px solid var(--theme-color-light);
-  border-radius: 15px;
+  border-radius: var(--form-border-radius);
 }
 .list-item:not(:last-child) {
   border-bottom: 1px solid var(--theme-color-normal);
+}
+.placeholder {
+  height: 100px;
+  width: 100%;
+  border: 1px solid var(--theme-color-normal);
+  border-radius: var(--form-border-radius);
+  text-align: center;
+  line-height: 100px;
+  margin: 20px 0;
+  font-size: 20px;
+  color: var(--theme-color-normal);
 }
