@@ -34,7 +34,7 @@ export default function CaloriesRecordEdit(props) {
   const onCaloriesChange = (event) => {
     setMealRecord({
       ...mealRecord,
-      calories: event.target.value,
+      calories: parseInt(event.target.value),
     });
   };
 
