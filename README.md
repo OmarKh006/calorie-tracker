@@ -1,18 +1,67 @@
-# React + Vite
+# 🥗 Calorie Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application to help you log and monitor your daily calorie intake. This is my first React project!
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** [View on GitHub Pages](https://omarkh006.github.io/calorie-tracker/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Log Meals** — Add food records with date, meal type (Breakfast, Lunch, Dinner, Snacks), content, and calorie count
+- **Date Filtering** — Filter your records by date to view what you ate on any given day
+- **Daily Calorie Total** — Automatically calculates and displays total calories for the selected date, still has a bug for now
+- **Interactive Calories** — Click on a calorie value to increment it by 10
+- **Input Validation** — Invalid records (0 or negative calories) are flagged visually and in the UI
+- **Modal Form** — Clean modal dialog for adding new food records without leaving the page
+- **Empty State** — Friendly "No Records To Display" message when no records match the selected date
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Technology                                                | Usage                            |
+| --------------------------------------------------------- | -------------------------------- |
+| [React](https://react.dev/)                               | UI components & state management |
+| [Vite](https://vitejs.dev/)                               | Build tool & dev server          |
+| [CSS Modules](https://github.com/css-modules/css-modules) | Scoped component styling         |
+| [react-modal](https://github.com/reactjs/react-modal)     | Accessible modal dialog          |
+| [GitHub Pages](https://pages.github.com/)                 | Deployment                       |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- npm (comes with Node.js)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/OmarKh006/calorie-tracker.git
+   cd calorie-tracker
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+### Build for Production
+
+```bash
+npm run build
+```
