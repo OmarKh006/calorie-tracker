@@ -35,13 +35,16 @@ const INITIAL_RECORDS = [
 
 function App() {
   const [records, setRecords] = useState(INITIAL_RECORDS);
+  const [nextID, setNextID] = useState(5);
 
   const formSubmit = (record) => {
     const formattedRecord = {
       ...record,
       date: new Date(record.date),
+      id: nextID,
     };
-    setRecords([formattedRecord, ...records]);
+    setRecords((prevRecord) => [formattedRecord, ...prevRecord]);
+    setNextID((previous) => previous + 1);
     console.log(record);
   };
 
