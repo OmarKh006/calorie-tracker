@@ -81,6 +81,9 @@ export default function CaloriesRecordEdit(props) {
 
       <div className={styles.footer}>
         <button>Add Record</button>
+        <button className={styles.cancel} onClick={props.onCancel}>
+          Cancel
+        </button>
       </div>
     </form>
   );

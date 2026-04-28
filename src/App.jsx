@@ -1,6 +1,8 @@
 import { useState } from "react";
 import CaloriesRecordEdit from "./components/edit/CaloriesRecordEdit";
 import ListingSection from "./components/calorieRecordsSection/ListingSection";
+import styles from "./App.module.css";
+import ReactModal from "react-modal";
 
 const INITIAL_RECORDS = [
   {
@@ -36,6 +38,32 @@ const INITIAL_RECORDS = [
 function App() {
   const [records, setRecords] = useState(INITIAL_RECORDS);
   const [nextID, setNextID] = useState(5);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const modalStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "none",
+      borderRadius: "var(--form-border-radius)",
+      padding: "0px",
+    },
+    overlay: {
+      backgroundColor: "rgba(0,0,0,0.5)",
+    },
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   const formSubmit = (record) => {
     const formattedRecord = {
@@ -45,12 +73,26 @@ function App() {
     };
     setRecords((prevRecord) => [formattedRecord, ...prevRecord]);
     setNextID((previous) => previous + 1);
+
+    handleCloseModal();
   };
 
   return (
     <>
-      <CaloriesRecordEdit onFormSubmit={formSubmit} />
+      <h1 className={styles.title}>Calories Tracker</h1>
+      <ReactModal
+        isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
+        contentLabel="ReactModal"
+        style={modalStyles}
+        onCancel={handleCloseModal}
+      >
+        <CaloriesRecordEdit onFormSubmit={formSubmit} />
+      </ReactModal>
       <ListingSection allRecords={records} />
+      <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
+        Track Food
+      </button>
     </>
   );
 }

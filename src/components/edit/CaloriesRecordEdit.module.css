@@ -3,7 +3,7 @@
 .form {
   background-color: var(--theme-background-ultralight);
   padding: 20px;
-  border-radius: 10px;
+  border-radius: var(--form-border-radius);
   border: 1px solid var(--theme-background-normal);
   display: grid;
 }
@@ -39,6 +39,7 @@
 
 .footer {
   display: flex;
+  gap: 1rem;
 }
 
 .footer button {
@@ -50,6 +51,10 @@
   padding: 10px;
   cursor: pointer;
   flex-grow: 1;
+}
+
+button.cancel {
+  background-color: maroon;
 }
 
 @media (min-width: 768px) {
