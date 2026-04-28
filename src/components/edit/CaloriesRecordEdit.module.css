@@ -1,20 +1,20 @@
 /* Form styles */
 
-form {
+.form {
   background-color: #d4e0ff;
   padding: 20px;
   border-radius: 10px;
 }
 
-form label {
+.form label {
   color: #333;
   margin-right: 30px;
   margin-bottom: 10px;
 }
 
-form input[type="text"],
-form input[type="number"],
-form input[type="date"] {
+.form input[type="text"],
+.calories-input,
+.form input[type="date"] {
   background-color: #333;
   color: #fff;
   border: none;
@@ -28,13 +28,13 @@ form input[type="date"] {
   box-sizing: border-box;
 }
 
-form input[type="number"].error {
+.error {
   border: 2px solid red;
   background-color: white;
   color: red;
 }
 
-form select {
+.form select {
   background-color: #333;
   color: #fff;
   border: none;
