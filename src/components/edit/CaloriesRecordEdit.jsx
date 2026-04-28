@@ -76,6 +76,15 @@ export default function CaloriesRecordEdit(props) {
         id="calories"
         value={mealRecord.calories}
         onChange={onCaloriesChange}
+        style={
+          mealRecord.calories < 0
+            ? {
+                border: "2px solid red",
+                backgroundColor: "white",
+                color: "black",
+              }
+            : {}
+        }
       />
 
       <div className="footer">
