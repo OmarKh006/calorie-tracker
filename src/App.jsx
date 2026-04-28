@@ -85,9 +85,11 @@ function App() {
         onRequestClose={handleCloseModal}
         contentLabel="ReactModal"
         style={modalStyles}
-        onCancel={handleCloseModal}
       >
-        <CaloriesRecordEdit onFormSubmit={formSubmit} />
+        <CaloriesRecordEdit
+          onFormSubmit={formSubmit}
+          onCancel={handleCloseModal}
+        />
       </ReactModal>
       <ListingSection allRecords={records} />
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
