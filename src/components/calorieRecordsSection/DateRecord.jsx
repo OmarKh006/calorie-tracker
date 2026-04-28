@@ -1,4 +1,4 @@
-import "./DateRecord.css";
+import styles from "./DateRecord.module.css";
 import StyledRecordCell from "../common/StyledRecordCell";
 
 function DateRecord(props) {
@@ -12,9 +12,15 @@ function DateRecord(props) {
 
   return (
     <StyledRecordCell>
-      <div className="record-date-month">{formatDate(props.date).month}</div>
-      <div className="record-date-day">{formatDate(props.date).day}</div>
-      <div className="record-date-year">{formatDate(props.date).year}</div>
+      <div className={styles["record-date-month"]}>
+        {formatDate(props.date).month}
+      </div>
+      <div className={styles["record-date-day"]}>
+        {formatDate(props.date).day}
+      </div>
+      <div className={styles["record-date-year"]}>
+        {formatDate(props.date).year}
+      </div>
     </StyledRecordCell>
   );
 }
