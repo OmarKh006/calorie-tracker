@@ -4,7 +4,7 @@ import styles from "./CaloriesRecordEdit.module.css";
 export default function CaloriesRecordEdit(props) {
   const DEFAULT_VALUE = {
     date: "",
-    meal: "",
+    meal: "Breakfast",
     content: "",
     calories: 0,
   };
