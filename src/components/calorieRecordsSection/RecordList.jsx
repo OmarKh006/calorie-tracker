@@ -1,27 +1,16 @@
 import CalorieRecord from "./CalorieRecord";
-import styled from "styled-components";
-
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-`;
-
-const ListItem = styled.li`
-  margin: 10px;
-`;
+import styles from "./RecordList.module.css";
 
 export default function RecordList(props) {
   return (
-    <List>
+    <ul className={styles.recordList}>
       {props.records.map((record) => {
         return (
-          <ListItem key={record.id}>
+          <li className={styles.listItem} key={record.id}>
             <CalorieRecord record={record}></CalorieRecord>
-          </ListItem>
+          </li>
         );
       })}
-    </List>
+    </ul>
   );
 }
