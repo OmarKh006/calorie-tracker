@@ -34,10 +34,10 @@ export default function CaloriesRecordEdit(props) {
   };
 
   const onCaloriesChange = (event) => {
-    setMealRecord({
-      ...mealRecord,
-      calories: parseInt(event.target.value),
-    });
+    const value = parseInt(event.target.value);
+    if (!isNaN(value)) {
+      setMealRecord({ ...mealRecord, calories: value });
+    }
   };
 
   const onSubmitHandler = (event) => {
