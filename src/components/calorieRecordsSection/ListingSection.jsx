@@ -5,6 +5,7 @@ import { useState } from "react";
 function ListingSection(props) {
   const { allRecords } = props;
   const [currentDate, setCurrentDate] = useState(new Date());
+  // const [filteredRecords, setFilteredRecords] = useState([]);
 
   const filterDate = (record) => {
     return (
@@ -13,6 +14,16 @@ function ListingSection(props) {
       record.date.getFullYear() === currentDate.getFullYear()
     );
   };
+
+  // useEffect(() => {
+  //   const timeoutID = setTimeout(() => {
+  //     setFilteredRecords((allRecords ?? []).filter(filterDate));
+  //   }, 5000);
+
+  //   return () => {
+  //     clearTimeout(timeoutID);
+  //   };
+  // }, [currentDate]);
 
   const filteredRecords = (allRecords ?? []).filter(filterDate);
   const calories = filteredRecords.reduce((sum, r) => sum + r.calories, 0);
