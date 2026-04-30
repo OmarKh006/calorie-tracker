@@ -14,7 +14,7 @@ function ListingSection(props) {
     );
   };
 
-  const filteredRecords = allRecords.filter(filterDate);
+  const filteredRecords = (allRecords ?? []).filter(filterDate);
   const calories = filteredRecords.reduce((sum, r) => sum + r.calories, 0);
 
   const onDateChangeHandler = (event) => {

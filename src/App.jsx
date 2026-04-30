@@ -1,43 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CaloriesRecordEdit from "./components/edit/CaloriesRecordEdit";
 import ListingSection from "./components/calorieRecordsSection/ListingSection";
 import styles from "./App.module.css";
 import ReactModal from "react-modal";
 
-const INITIAL_RECORDS = [
-  {
-    id: 0,
-    date: new Date(2026, 3, 1),
-    meal: "Breakfast",
-    content: "Omlette",
-    calories: 300,
-  },
-  {
-    id: 1,
-    date: new Date(2026, 3, 3),
-    meal: "Lunch",
-    content: "Chicken",
-    calories: 500,
-  },
-  {
-    id: 2,
-    date: new Date(2026, 3, 5),
-    meal: "Dinner",
-    content: "Yoghurt",
-    calories: 100,
-  },
-  {
-    id: 3,
-    date: new Date(2026, 3, 26),
-    meal: "Snacks",
-    content: "Banana",
-    calories: 300,
-  },
-];
+const LOCAL_STORAGE_KEY = "calorieRecords";
 
 function App() {
-  const [records, setRecords] = useState(INITIAL_RECORDS);
-  const [nextID, setNextID] = useState(5);
+  const [records, setRecords] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalStyles = {
@@ -57,6 +27,22 @@ function App() {
     },
   };
 
+  function saveToLocalStorage() {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
+  }
+
+  function loadFromLocalStorage() {
+    const loadedRecords = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (loadedRecords != null && loadedRecords !== "undefined")
+      setRecords(
+        JSON.parse(loadedRecords).map((record) => ({
+          ...record,
+          date: new Date(record.date),
+        })),
+      );
+    else setRecords([]);
+  }
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -69,13 +55,16 @@ function App() {
     const formattedRecord = {
       ...record,
       date: new Date(record.date),
-      id: nextID,
+      id: crypto.randomUUID(),
     };
-    setRecords((prevRecord) => [formattedRecord, ...prevRecord]);
-    setNextID((previous) => previous + 1);
-
+    setRecords((prevRecord) => [formattedRecord, ...(prevRecord ?? [])]);
     handleCloseModal();
   };
+
+  useEffect(() => {
+    if (!records) loadFromLocalStorage();
+    else saveToLocalStorage();
+  }, [records]);
 
   return (
     <>
@@ -91,7 +80,7 @@ function App() {
           onCancel={handleCloseModal}
         />
       </ReactModal>
-      <ListingSection allRecords={records} />
+      {records && <ListingSection allRecords={records} />}
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
         Track Food
       </button>
