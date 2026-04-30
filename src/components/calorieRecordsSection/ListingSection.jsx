@@ -5,7 +5,6 @@ import { useState } from "react";
 function ListingSection(props) {
   const { allRecords } = props;
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [calories, setCalories] = useState(0);
 
   const filterDate = (record) => {
     return (
@@ -16,16 +15,10 @@ function ListingSection(props) {
   };
 
   const filteredRecords = allRecords.filter(filterDate);
+  const calories = filteredRecords.reduce((sum, r) => sum + r.calories, 0);
 
   const onDateChangeHandler = (event) => {
-    let sum = 0;
     setCurrentDate(new Date(event.target.value));
-
-    filteredRecords.forEach((record) => {
-      sum += record.calories;
-    });
-
-    setCalories(sum);
   };
 
   return (

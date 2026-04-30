@@ -9,6 +9,8 @@ export default function CaloriesRecordEdit(props) {
     calories: 0,
   };
   const [mealRecord, setMealRecord] = useState(DEFAULT_VALUE);
+  const isFormValid =
+    mealRecord.date && mealRecord.content && mealRecord.calories > 0;
 
   const onDateChange = (event) => {
     setMealRecord({
@@ -49,6 +51,16 @@ export default function CaloriesRecordEdit(props) {
     props.onCancel();
   };
 
+  // useEffect(() => {
+  //   setIsFormValid(
+  //     mealRecord.date && mealRecord.content && mealRecord.calories > 0,
+  //   );
+  // }, [
+  //   mealRecord.date,
+  //   mealRecord.content,
+  //   mealRecord.calories,
+  // ]);
+
   return (
     <form className={styles.form} onSubmit={onSubmitHandler}>
       <label htmlFor="date">Date:</label>
@@ -82,10 +94,11 @@ export default function CaloriesRecordEdit(props) {
         value={mealRecord.calories}
         onChange={onCaloriesChange}
         className={`${styles["calories-input"]} ${mealRecord.calories < 0 ? styles.error : ""}`}
+        min={0}
       />
 
       <div className={styles.footer}>
-        <button>Add Record</button>
+        <button disabled={!isFormValid}>Add Record</button>
         <button
           type="button"
           className={styles.cancel}

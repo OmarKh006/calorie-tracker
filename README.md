@@ -10,7 +10,7 @@ A React-based web application to help you log and monitor your daily calorie int
 
 - **Log Meals** — Add food records with date, meal type (Breakfast, Lunch, Dinner, Snacks), content, and calorie count
 - **Date Filtering** — Filter your records by date to view what you ate on any given day
-- **Daily Calorie Total** — Automatically calculates and displays total calories for the selected date, still has a bug for now
+- **Daily Calorie Total** — Automatically calculates and displays total calories for the selected date
 - **Interactive Calories** — Click on a calorie value to increment it by 10
 - **Input Validation** — Invalid records (0 or negative calories) are flagged visually and in the UI
 - **Modal Form** — Clean modal dialog for adding new food records without leaving the page
