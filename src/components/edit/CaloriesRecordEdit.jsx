@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CaloriesRecordEdit.module.css";
 
 export default function CaloriesRecordEdit(props) {
@@ -9,14 +9,28 @@ export default function CaloriesRecordEdit(props) {
     calories: 0,
   };
   const [mealRecord, setMealRecord] = useState(DEFAULT_VALUE);
-  const isFormValid =
-    mealRecord.date && mealRecord.content && mealRecord.calories > 0;
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isDateValid, setIsDateValid] = useState(false);
+  const [isContentValid, setIsContentValid] = useState(false);
+  const [isCaloriesValid, setIsCaloriesValid] = useState(true);
+
+  // const isFormValid =
+  //   mealRecord.date && mealRecord.content && mealRecord.calories > 0;
+
+  useEffect(() => {
+    console.log({
+      isFormValid: isDateValid && isContentValid && isCaloriesValid,
+    });
+
+    setIsFormValid(isDateValid && isContentValid && isCaloriesValid);
+  }, [isDateValid, isContentValid, isCaloriesValid]);
 
   const onDateChange = (event) => {
     setMealRecord({
       ...mealRecord,
       date: event.target.value,
     });
+    setIsDateValid(!!event.target.value);
   };
 
   const onMealChange = (event) => {
@@ -31,12 +45,19 @@ export default function CaloriesRecordEdit(props) {
       ...mealRecord,
       content: event.target.value,
     });
+    setIsContentValid(!!event.target.value);
   };
 
   const onCaloriesChange = (event) => {
     const value = parseInt(event.target.value);
     if (!isNaN(value)) {
       setMealRecord({ ...mealRecord, calories: value });
+      setIsCaloriesValid(
+        (value >= 0 && mealRecord.content !== "sports") ||
+          (value <= 0 && mealRecord.content === "sports"),
+      );
+    } else {
+      setIsCaloriesValid(false);
     }
   };
 
@@ -51,20 +72,11 @@ export default function CaloriesRecordEdit(props) {
     props.onCancel();
   };
 
-  // useEffect(() => {
-  //   setIsFormValid(
-  //     mealRecord.date && mealRecord.content && mealRecord.calories > 0,
-  //   );
-  // }, [
-  //   mealRecord.date,
-  //   mealRecord.content,
-  //   mealRecord.calories,
-  // ]);
-
   return (
     <form className={styles.form} onSubmit={onSubmitHandler}>
       <label htmlFor="date">Date:</label>
       <input
+        className={`${styles["form-input"]} ${!isDateValid ? styles.error : ""}`}
         type="date"
         id="date"
         value={mealRecord.date}
@@ -72,7 +84,12 @@ export default function CaloriesRecordEdit(props) {
       />
 
       <label htmlFor="meal">Meal:</label>
-      <select id="meal" value={mealRecord.meal} onChange={onMealChange}>
+      <select
+        className={styles["form-input"]}
+        id="meal"
+        value={mealRecord.meal}
+        onChange={onMealChange}
+      >
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
@@ -81,6 +98,7 @@ export default function CaloriesRecordEdit(props) {
 
       <label htmlFor="content">Content:</label>
       <input
+        className={`${styles["form-input"]} ${!isContentValid ? styles.error : ""}`}
         type="text"
         id="content"
         value={mealRecord.content}
@@ -93,8 +111,7 @@ export default function CaloriesRecordEdit(props) {
         id="calories"
         value={mealRecord.calories}
         onChange={onCaloriesChange}
-        className={`${styles["calories-input"]} ${mealRecord.calories < 0 ? styles.error : ""}`}
-        min={0}
+        className={`${styles["form-input"]} ${!isCaloriesValid ? styles.error : ""}`}
       />
 
       <div className={styles.footer}>
