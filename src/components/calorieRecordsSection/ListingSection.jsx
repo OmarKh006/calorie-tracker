@@ -15,18 +15,7 @@ function ListingSection(props) {
     );
   };
 
-  // useEffect(() => {
-  //   const timeoutID = setTimeout(() => {
-  //     setFilteredRecords((allRecords ?? []).filter(filterDate));
-  //   }, 5000);
-
-  //   return () => {
-  //     clearTimeout(timeoutID);
-  //   };
-  // }, [currentDate]);
-
   const filteredRecords = (allRecords ?? []).filter(filterDate);
-  const calories = filteredRecords.reduce((sum, r) => sum + r.calories, 0);
 
   const onDateChangeHandler = (event) => {
     props.setCurrentDate(new Date(event.target.value));
@@ -44,10 +33,11 @@ function ListingSection(props) {
         value={props.currentDate.toISOString().split("T")[0]}
         onChange={onDateChangeHandler}
       />
-      <label className={`${styles["listing-picker-label"]}`}>
-        Total Calories : {calories}
-      </label>
-      <RecordList records={filteredRecords} />
+      <RecordList
+        records={filteredRecords}
+        setCalories={props.setCalories}
+        calories={props.calories}
+      />
     </>
   );
 }

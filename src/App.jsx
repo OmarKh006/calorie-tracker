@@ -10,6 +10,7 @@ function App() {
   const [records, setRecords] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [calories, setCalories] = useState(0);
 
   const modalStyles = {
     content: {
@@ -81,6 +82,7 @@ function App() {
           onCancel={handleCloseModal}
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
+          calories={calories}
         />
       </ReactModal>
       {records && (
@@ -88,6 +90,8 @@ function App() {
           allRecords={records}
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
+          calories={calories}
+          setCalories={setCalories}
         />
       )}
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
