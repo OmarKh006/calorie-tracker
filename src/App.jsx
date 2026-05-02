@@ -9,6 +9,7 @@ const LOCAL_STORAGE_KEY = "calorieRecords";
 function App() {
   const [records, setRecords] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   const modalStyles = {
     content: {
@@ -78,9 +79,17 @@ function App() {
         <CaloriesRecordEdit
           onFormSubmit={formSubmit}
           onCancel={handleCloseModal}
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
         />
       </ReactModal>
-      {records && <ListingSection allRecords={records} />}
+      {records && (
+        <ListingSection
+          allRecords={records}
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+        />
+      )}
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
         Track Food
       </button>

@@ -1,17 +1,17 @@
 import RecordList from "./RecordList";
 import styles from "./ListingSection.module.css";
-import { useState } from "react";
+// import { useState } from "react";
 
 function ListingSection(props) {
   const { allRecords } = props;
-  const [currentDate, setCurrentDate] = useState(new Date());
+
   // const [filteredRecords, setFilteredRecords] = useState([]);
 
   const filterDate = (record) => {
     return (
-      record.date.getDate() === currentDate.getDate() &&
-      record.date.getMonth() === currentDate.getMonth() &&
-      record.date.getFullYear() === currentDate.getFullYear()
+      record.date.getDate() === props.currentDate.getDate() &&
+      record.date.getMonth() === props.currentDate.getMonth() &&
+      record.date.getFullYear() === props.currentDate.getFullYear()
     );
   };
 
@@ -29,7 +29,7 @@ function ListingSection(props) {
   const calories = filteredRecords.reduce((sum, r) => sum + r.calories, 0);
 
   const onDateChangeHandler = (event) => {
-    setCurrentDate(new Date(event.target.value));
+    props.setCurrentDate(new Date(event.target.value));
   };
 
   return (
@@ -41,7 +41,7 @@ function ListingSection(props) {
         className={styles["listing-picker-input"]}
         type="date"
         id="listingDate"
-        value={currentDate.toISOString().split("T")[0]}
+        value={props.currentDate.toISOString().split("T")[0]}
         onChange={onDateChangeHandler}
       />
       <label className={`${styles["listing-picker-label"]}`}>
