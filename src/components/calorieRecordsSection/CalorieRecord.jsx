@@ -1,8 +1,19 @@
 import styles from "./CalorieRecord.module.css";
 import DateRecord from "./DateRecord";
 import StyledRecordCell from "../common/StyledRecordCell";
+import { useContext, useEffect } from "react";
+import AppContext from "../../app-context";
 
 function CalorieRecord(props) {
+  const { setCalories: addCalories } = useContext(AppContext);
+
+  useEffect(() => {
+    addCalories((prev) => prev + props.record.calories);
+
+    return () => {
+      addCalories((prev) => prev - props.record.calories);
+    };
+  }, []);
   return (
     <>
       <ul className={styles.record}>
