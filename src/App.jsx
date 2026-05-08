@@ -3,15 +3,13 @@ import CaloriesRecordEdit from "./components/edit/CaloriesRecordEdit";
 import ListingSection from "./components/calorieRecordsSection/ListingSection";
 import styles from "./App.module.css";
 import ReactModal from "react-modal";
-import AppContext from "./app-context";
+import AppContextProvider from "./AppContext";
 
 const LOCAL_STORAGE_KEY = "calorieRecords";
 
 function App() {
   const [records, setRecords] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [calories, setCalories] = useState(0);
 
   const modalStyles = {
     content: {
@@ -72,14 +70,7 @@ function App() {
   return (
     <>
       <h1 className={styles.title}>Calories Tracker</h1>
-      <AppContext.Provider
-        value={{
-          currentDate,
-          setCurrentDate,
-          calories,
-          setCalories,
-        }}
-      >
+      <AppContextProvider>
         <ReactModal
           isOpen={isModalOpen}
           onRequestClose={handleCloseModal}
@@ -92,7 +83,7 @@ function App() {
           />
         </ReactModal>
         {records && <ListingSection allRecords={records} />}
-      </AppContext.Provider>
+      </AppContextProvider>
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
         Track Food
       </button>

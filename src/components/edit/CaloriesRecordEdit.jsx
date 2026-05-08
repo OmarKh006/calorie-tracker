@@ -1,7 +1,7 @@
 import { useEffect, useState, useReducer, useContext } from "react";
 import styles from "./CaloriesRecordEdit.module.css";
 import { getDateFromString } from "../../utils/utils";
-import AppContext from "../../app-context";
+import { AppContext } from "../../AppContext";
 
 const DEFAULT_VALUE = {
   date: { value: "", valid: false },

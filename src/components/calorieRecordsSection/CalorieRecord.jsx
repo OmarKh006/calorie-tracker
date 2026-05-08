@@ -2,7 +2,7 @@ import styles from "./CalorieRecord.module.css";
 import DateRecord from "./DateRecord";
 import StyledRecordCell from "../common/StyledRecordCell";
 import { useContext, useEffect } from "react";
-import AppContext from "../../app-context";
+import { AppContext } from "../../AppContext";
 
 function CalorieRecord(props) {
   const { setCalories: addCalories } = useContext(AppContext);
