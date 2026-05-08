@@ -90,7 +90,7 @@ export default function CaloriesRecordEdit(props) {
     dispatchFn({
       type: "UPDATE_FIELD",
       key: "calories",
-      value: event.target.value,
+      value: Number(event.target.value),
     });
   };
 
