@@ -55,7 +55,7 @@ function App() {
   const formSubmit = (record) => {
     const formattedRecord = {
       ...record,
-      date: new Date(record.date),
+      date: record.date,
       id: crypto.randomUUID(),
     };
     setRecords((prevRecord) => [formattedRecord, ...(prevRecord ?? [])]);

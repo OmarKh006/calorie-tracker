@@ -6,7 +6,8 @@ import { AppContext } from "../../AppContext";
 
 function ListingSection(props) {
   const { allRecords } = props;
-  const { currentDate, setCurrentDate } = useContext(AppContext);
+  const { currentDate, currentDateString, setCurrentDate } =
+    useContext(AppContext);
 
   // const [filteredRecords, setFilteredRecords] = useState([]);
 
@@ -21,7 +22,7 @@ function ListingSection(props) {
   const filteredRecords = (allRecords ?? []).filter(filterDate);
 
   const onDateChangeHandler = (event) => {
-    setCurrentDate(new Date(event.target.value));
+    setCurrentDate(event.target.value);
   };
 
   return (
@@ -33,7 +34,7 @@ function ListingSection(props) {
         className={styles["listing-picker-input"]}
         type="date"
         id="listingDate"
-        value={currentDate.toISOString().split("T")[0]}
+        value={currentDateString}
         onChange={onDateChangeHandler}
       />
       <RecordList records={filteredRecords} />
