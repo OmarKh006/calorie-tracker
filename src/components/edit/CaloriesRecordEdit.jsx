@@ -108,27 +108,28 @@ export default function CaloriesRecordEdit(props) {
   return (
     <form className={styles.form} onSubmit={onSubmitHandler}>
       <p className={styles.warning}>You have spent {calories} calories</p>
-      <label htmlFor="date">Date:</label>
-      <input
-        className={`${styles["form-input"]} ${!isDateValid ? styles.error : ""}`}
+      <FormInput
+        label="Date"
         type="date"
         id="date"
         value={currentDateString}
         onChange={onDateChange}
+        valid={isDateValid}
       />
 
-      <label htmlFor="meal">Meal:</label>
-      <select
-        className={styles["form-input"]}
+      <FormInput
+        label="Meal"
         id="meal"
         onBlur={onMealBlur}
         ref={mealRef}
+        type="select"
+        isValid
       >
         <option value="Breakfast">Breakfast</option>
         <option value="Lunch">Lunch</option>
         <option value="Dinner">Dinner</option>
         <option value="Snacks">Snacks</option>
-      </select>
+      </FormInput>
 
       <FormInput
         label="Content"
