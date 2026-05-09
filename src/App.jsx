@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import CaloriesRecordEdit from "./components/edit/CaloriesRecordEdit";
 import ListingSection from "./components/calorieRecordsSection/ListingSection";
 import styles from "./App.module.css";
-import ReactModal from "react-modal";
+// import ReactModal from "react-modal";
+import Modal from "./components/common/Modal";
 import AppContextProvider from "./AppContext";
 
 const LOCAL_STORAGE_KEY = "calorieRecords";
@@ -10,23 +11,6 @@ const LOCAL_STORAGE_KEY = "calorieRecords";
 function App() {
   const [records, setRecords] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const modalStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      border: "none",
-      borderRadius: "var(--form-border-radius)",
-      padding: "0px",
-    },
-    overlay: {
-      backgroundColor: "rgba(0,0,0,0.5)",
-    },
-  };
 
   function saveToLocalStorage() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
@@ -71,17 +55,12 @@ function App() {
     <>
       <h1 className={styles.title}>Calories Tracker</h1>
       <AppContextProvider>
-        <ReactModal
-          isOpen={isModalOpen}
-          onRequestClose={handleCloseModal}
-          contentLabel="ReactModal"
-          style={modalStyles}
-        >
+        <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
           <CaloriesRecordEdit
             onFormSubmit={formSubmit}
             onCancel={handleCloseModal}
           />
-        </ReactModal>
+        </Modal>
         {records && <ListingSection allRecords={records} />}
       </AppContextProvider>
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
