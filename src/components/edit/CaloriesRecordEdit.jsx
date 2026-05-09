@@ -1,6 +1,7 @@
 import { useEffect, useState, useReducer, useContext, useRef } from "react";
 import styles from "./CaloriesRecordEdit.module.css";
 import { AppContext } from "../../AppContext";
+import FormInput from "../common/FormInput";
 
 const DEFAULT_VALUE = {
   meal: true,
@@ -129,21 +130,21 @@ export default function CaloriesRecordEdit(props) {
         <option value="Snacks">Snacks</option>
       </select>
 
-      <label htmlFor="content">Content:</label>
-      <input
-        className={`${styles["form-input"]} ${!isContentValid ? styles.error : ""}`}
+      <FormInput
+        label="Content"
         type="text"
         id="content"
         onBlur={onContentBlur}
+        isValid={isContentValid}
         ref={contentRef}
       />
 
-      <label htmlFor="calories">Calories:</label>
-      <input
+      <FormInput
+        label="Calories"
         type="number"
         id="calories"
-        className={`${styles["form-input"]} ${!isCaloriesValid ? styles.error : ""}`}
         onBlur={onCaloriesBlur}
+        isValid={isCaloriesValid}
         ref={caloriesRef}
       />
 
