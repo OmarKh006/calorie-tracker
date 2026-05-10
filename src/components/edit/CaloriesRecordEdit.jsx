@@ -1,10 +1,10 @@
 import {
   useEffect,
-  useState,
   useReducer,
   useContext,
   useRef,
   useCallback,
+  useMemo,
 } from "react";
 import styles from "./CaloriesRecordEdit.module.css";
 import { AppContext } from "../../AppContext";
@@ -48,7 +48,6 @@ function formReducer(state, action) {
 }
 
 export default function CaloriesRecordEdit(props) {
-  const [isFormValid, setIsFormValid] = useState(false);
   const {
     currentDate,
     isDateValid,
@@ -66,11 +65,13 @@ export default function CaloriesRecordEdit(props) {
   // const isFormValid =
   //   mealRecord.date && mealRecord.content && mealRecord.calories > 0;
 
+  const isFormValid = useMemo(() => {
+    return isDateValid && isContentValid && isCaloriesValid;
+  }, [isDateValid, isContentValid, isCaloriesValid]);
+
   useEffect(() => {
     if (!isContentValid) contentRef.current.focus();
-
-    setIsFormValid(isDateValid && isContentValid && isCaloriesValid);
-  }, [isDateValid, isContentValid, isCaloriesValid]);
+  }, [isContentValid]);
 
   const onDateChange = (event) => {
     setCurrentDate(event.target.value);
