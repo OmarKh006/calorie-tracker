@@ -13,7 +13,10 @@ export const AppContext = createContext({
 
 function AppContextProvider(props) {
   const { children } = props;
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const todayString = new Date().toISOString().split("T")[0];
+  const [currentDate, setCurrentDate] = useState(
+    new Date(todayString + "T00:00:00Z"),
+  );
   const [calories, setCalories] = useState(0);
 
   const updateCurrentDate = (val) => {

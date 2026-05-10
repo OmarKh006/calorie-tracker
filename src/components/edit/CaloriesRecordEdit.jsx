@@ -114,7 +114,7 @@ export default function CaloriesRecordEdit(props) {
         id="date"
         value={currentDateString}
         onChange={onDateChange}
-        valid={isDateValid}
+        isValid={isDateValid}
       />
 
       <FormInput
