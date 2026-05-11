@@ -3,7 +3,6 @@ import CaloriesRecordEdit from "../edit/CaloriesRecordEdit";
 import ListingSection from "../calorieRecordsSection/ListingSection";
 import styles from "./TrackPage.module.css";
 import ReactModal from "react-modal";
-import AppContextProvider from "../../AppContext";
 
 const LOCAL_STORAGE_KEY = "calorieRecords";
 
@@ -70,20 +69,18 @@ export function TrackPage() {
   return (
     <>
       <h1 className={styles.title}>Calories Tracker</h1>
-      <AppContextProvider>
-        <ReactModal
-          isOpen={isModalOpen}
-          onRequestClose={handleCloseModal}
-          contentLabel="ReactModal"
-          style={modalStyles}
-        >
-          <CaloriesRecordEdit
-            onFormSubmit={formSubmit}
-            onCancel={handleCloseModal}
-          />
-        </ReactModal>
-        {records && <ListingSection allRecords={records} />}
-      </AppContextProvider>
+      <ReactModal
+        isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
+        contentLabel="ReactModal"
+        style={modalStyles}
+      >
+        <CaloriesRecordEdit
+          onFormSubmit={formSubmit}
+          onCancel={handleCloseModal}
+        />
+      </ReactModal>
+      {records && <ListingSection allRecords={records} />}
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
         Track Food
       </button>
