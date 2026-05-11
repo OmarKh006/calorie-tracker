@@ -106,7 +106,7 @@ export default function CaloriesRecordEdit(props) {
       date: currentDate,
       meal: mealRef.current.value,
       content: contentRef.current.value,
-      calories: caloriesRef.current.value,
+      calories: Number(caloriesRef.current.value),
     });
   };
 

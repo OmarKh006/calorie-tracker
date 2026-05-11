@@ -14,6 +14,7 @@ function CalorieRecord(props) {
       addCalories((prev) => prev - props.record.calories);
     };
   }, []);
+
   return (
     <>
       <ul className={styles.record}>

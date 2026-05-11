@@ -1,7 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import CalorieRecord from "./CalorieRecord";
 import styles from "./RecordList.module.css";
 import { AppContext } from "../../AppContext";
+import { Link } from "react-router-dom";
 
 export default function RecordList(props) {
   // const totalCalories = (props.records ?? []).reduce(
@@ -19,7 +20,9 @@ export default function RecordList(props) {
       <ul className={styles["record-list"]}>
         {props.records.map((record) => (
           <li className={styles["list-item"]} key={record.id}>
-            <CalorieRecord record={record} />
+            <Link to={`/track/${record.id}`}>
+              <CalorieRecord record={record} />
+            </Link>
           </li>
         ))}
       </ul>
