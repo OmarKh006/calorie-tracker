@@ -12,8 +12,14 @@ Built with React on the frontend and an Express + SQLite backend, structured as 
 ```
 calorie-tracker/
 ├── packages/
-│   ├── client/        # React frontend (Vite)
-│   └── server/        # Express backend (SQLite)
+│   ├── client/              # React frontend (Vite)
+│   └── server/              # Express backend (SQLite)
+│       ├── db/
+│       │   ├── connection.js
+│       │   └── createTable.js
+│       ├── routes/
+│       │   └── apisRouter.js
+│       └── index.js
 ├── lerna.json
 └── package.json
 ```
@@ -96,11 +102,25 @@ calorie-tracker/
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint        | Description                    |
-| ------ | --------------- | ------------------------------ |
-| GET    | `/api/check`    | Check if the server is running |
-| GET    | `/api/calories` | Get all calorie records        |
-| POST   | `/api/calories` | Add a new calorie record       |
+| Method | Endpoint              | Description                                         |
+| ------ | --------------------- | --------------------------------------------------- |
+| GET    | `/api/check`          | Check if the server is running                      |
+| GET    | `/api/calories`       | Get all calorie records                             |
+| GET    | `/api/calories/:date` | Get records for a specific date (e.g. `2026-05-13`) |
+| POST   | `/api/calories`       | Add a new calorie record                            |
+| PUT    | `/api/calories/:id`   | Update an existing record by ID                     |
+| DELETE | `/api/calories/:id`   | Delete a record by ID                               |
+
+### POST & PUT Request Body
+
+```json
+{
+  "date": "2026-05-13",
+  "meal": "Breakfast",
+  "content": "Eggs and toast",
+  "calories": 350
+}
+```
 
 ---
 

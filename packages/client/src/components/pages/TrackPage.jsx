@@ -3,11 +3,12 @@ import CaloriesRecordEdit from "../edit/CaloriesRecordEdit";
 import ListingSection from "../calorieRecordsSection/ListingSection";
 import styles from "./TrackPage.module.css";
 import ReactModal from "react-modal";
+import { getDateFromString } from "../../utils/utils";
 
 const LOCAL_STORAGE_KEY = "calorieRecords";
 
 export function TrackPage() {
-  const [records, setRecords] = useState();
+  const [records, setRecords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalStyles = {
@@ -31,16 +32,15 @@ export function TrackPage() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
   }
 
-  function loadFromLocalStorage() {
-    const loadedRecords = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (loadedRecords != null && loadedRecords !== "undefined")
-      setRecords(
-        JSON.parse(loadedRecords).map((record) => ({
-          ...record,
-          date: new Date(record.date),
-        })),
-      );
-    else setRecords([]);
+  async function loadFromDB() {
+    const response = await fetch("/api/calories");
+    const data = await response.json();
+    setRecords(
+      data.map((record) => ({
+        ...record,
+        date: getDateFromString(record.date),
+      })),
+    );
   }
 
   const handleOpenModal = () => {
@@ -62,9 +62,8 @@ export function TrackPage() {
   };
 
   useEffect(() => {
-    if (!records) loadFromLocalStorage();
-    else saveToLocalStorage();
-  }, [records]);
+    loadFromDB();
+  }, []);
 
   return (
     <>
