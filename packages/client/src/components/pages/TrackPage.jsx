@@ -3,13 +3,11 @@ import CaloriesRecordEdit from "../edit/CaloriesRecordEdit";
 import ListingSection from "../calorieRecordsSection/ListingSection";
 import styles from "./TrackPage.module.css";
 import ReactModal from "react-modal";
-import { getDateFromString } from "../../utils/utils";
+import { useLoadDate } from "../../utils/hooks";
 
 export function TrackPage() {
-  const [records, setRecords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [records, loading, error, refreshData] = useLoadDate("/api/calories");
 
   const modalStyles = {
     content: {
@@ -39,31 +37,9 @@ export function TrackPage() {
       });
 
       if (!response.ok) throw new Error("Failed to add new record");
-      loadFromDB();
+      refreshData();
     } catch (err) {
-      setError(err.message);
-    }
-  }
-
-  async function loadFromDB() {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch("/api/calories");
-      if (response.status === 404)
-        throw new Error("Error : Data not found 404");
-      if (!response.ok) throw new Error("Unknown error occurred");
-      const data = await response.json();
-      setRecords(
-        data.map((record) => ({
-          ...record,
-          date: getDateFromString(record.date),
-        })),
-      );
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+      console.log(err);
     }
   }
 
@@ -79,10 +55,6 @@ export function TrackPage() {
     saveToDB(record);
     handleCloseModal();
   };
-
-  useEffect(() => {
-    loadFromDB();
-  }, []);
 
   return (
     <>
