@@ -1,0 +1,25 @@
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export function useRedirectAfterCountDown(startCount, redirectLink) {
+  const [counter, setCounter] = useState(startCount);
+  const intervalHandler = useRef();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    intervalHandler.current = setInterval(() => {
+      setCounter((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(intervalHandler.current);
+  }, []);
+
+  useEffect(() => {
+    if (counter === 0) {
+      clearInterval(intervalHandler.current);
+      navigate(redirectLink);
+    }
+  }, [counter]);
+
+  return counter;
+}
