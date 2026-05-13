@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export const PageLayout = () => {
   useEffect(() => {
-    fetch("/api/health")
+    fetch("/api/check")
       .then((res) => res.json())
       .then((data) => console.log(data));
   }, []);
