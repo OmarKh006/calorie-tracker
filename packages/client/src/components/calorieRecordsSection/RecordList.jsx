@@ -3,6 +3,7 @@ import CalorieRecord from "./CalorieRecord";
 import styles from "./RecordList.module.css";
 import { AppContext } from "../../AppContext";
 import { Link } from "react-router-dom";
+import TextContent from "../common/TextContent";
 
 export default function RecordList(props) {
   // const totalCalories = (props.records ?? []).reduce(
@@ -13,7 +14,7 @@ export default function RecordList(props) {
   const { calories } = useContext(AppContext);
 
   if (!props.records?.length)
-    return <div className={styles.placeholder}>No Records To Display</div>;
+    return <TextContent value="No Records To Display" />;
 
   return (
     <>

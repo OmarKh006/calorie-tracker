@@ -2,10 +2,11 @@ import RecordList from "./RecordList";
 import styles from "./ListingSection.module.css";
 import { useContext } from "react";
 import { AppContext } from "../../AppContext";
+import TextContent from "../common/TextContent";
 // import { useState } from "react";
 
 function ListingSection(props) {
-  const { allRecords } = props;
+  const { allRecords, isLoading } = props;
   const { currentDate, currentDateString, setCurrentDate } =
     useContext(AppContext);
 
@@ -37,7 +38,8 @@ function ListingSection(props) {
         value={currentDateString}
         onChange={onDateChangeHandler}
       />
-      <RecordList records={filteredRecords} />
+      {isLoading && <TextContent value="Loading..." />}
+      {!isLoading && <RecordList records={filteredRecords} />}
     </>
   );
 }

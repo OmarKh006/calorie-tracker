@@ -10,6 +10,7 @@ const LOCAL_STORAGE_KEY = "calorieRecords";
 export function TrackPage() {
   const [records, setRecords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const modalStyles = {
     content: {
@@ -33,6 +34,7 @@ export function TrackPage() {
   }
 
   async function loadFromDB() {
+    setLoading(true);
     const response = await fetch("/api/calories");
     const data = await response.json();
     setRecords(
@@ -41,6 +43,7 @@ export function TrackPage() {
         date: getDateFromString(record.date),
       })),
     );
+    setLoading(false);
   }
 
   const handleOpenModal = () => {
@@ -79,7 +82,7 @@ export function TrackPage() {
           onCancel={handleCloseModal}
         />
       </ReactModal>
-      {records && <ListingSection allRecords={records} />}
+      {records && <ListingSection allRecords={records} isLoading={loading} />}
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
         Track Food
       </button>
