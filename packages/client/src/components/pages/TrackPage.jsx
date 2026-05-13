@@ -11,6 +11,7 @@ export function TrackPage() {
   const [records, setRecords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const modalStyles = {
     content: {
@@ -29,21 +30,30 @@ export function TrackPage() {
     },
   };
 
-  function saveToLocalStorage() {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
-  }
+  // function saveToLocalStorage() {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
+  // }
 
   async function loadFromDB() {
     setLoading(true);
-    const response = await fetch("/api/calories");
-    const data = await response.json();
-    setRecords(
-      data.map((record) => ({
-        ...record,
-        date: getDateFromString(record.date),
-      })),
-    );
-    setLoading(false);
+    setError(null);
+    try {
+      const response = await fetch("/api/calories");
+      if (response.status === 404)
+        throw new Error("Error : Data not found 404");
+      if (!response.ok) throw new Error("Unknown error occurred");
+      const data = await response.json();
+      setRecords(
+        data.map((record) => ({
+          ...record,
+          date: getDateFromString(record.date),
+        })),
+      );
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const handleOpenModal = () => {
@@ -82,7 +92,9 @@ export function TrackPage() {
           onCancel={handleCloseModal}
         />
       </ReactModal>
-      {records && <ListingSection allRecords={records} isLoading={loading} />}
+      {records && (
+        <ListingSection allRecords={records} isLoading={loading} err={error} />
+      )}
       <button className={styles["open-modal-button"]} onClick={handleOpenModal}>
         Track Food
       </button>

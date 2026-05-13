@@ -6,7 +6,7 @@ import TextContent from "../common/TextContent";
 // import { useState } from "react";
 
 function ListingSection(props) {
-  const { allRecords, isLoading } = props;
+  const { allRecords, isLoading, err } = props;
   const { currentDate, currentDateString, setCurrentDate } =
     useContext(AppContext);
 
@@ -26,6 +26,12 @@ function ListingSection(props) {
     setCurrentDate(event.target.value);
   };
 
+  let content = <RecordList records={filteredRecords} />;
+
+  if (err) content = <TextContent value={err} />;
+
+  if (isLoading) content = <TextContent value="Loading..." />;
+
   return (
     <>
       <label className={styles["listing-picker-label"]} htmlFor="listingDate">
@@ -38,8 +44,7 @@ function ListingSection(props) {
         value={currentDateString}
         onChange={onDateChangeHandler}
       />
-      {isLoading && <TextContent value="Loading..." />}
-      {!isLoading && <RecordList records={filteredRecords} />}
+      {content}
     </>
   );
 }
