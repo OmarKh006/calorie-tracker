@@ -96,11 +96,11 @@ calorie-tracker/
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint       | Description                    |
-| ------ | -------------- | ------------------------------ |
-| GET    | `/api/check`   | Check if the server is running |
-| GET    | `/api/records` | Get all calorie records        |
-| POST   | `/api/records` | Add a new calorie record       |
+| Method | Endpoint        | Description                    |
+| ------ | --------------- | ------------------------------ |
+| GET    | `/api/check`    | Check if the server is running |
+| GET    | `/api/calories` | Get all calorie records        |
+| POST   | `/api/calories` | Add a new calorie record       |
 
 ---
 
