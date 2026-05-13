@@ -102,14 +102,15 @@ calorie-tracker/
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint              | Description                                         |
-| ------ | --------------------- | --------------------------------------------------- |
-| GET    | `/api/check`          | Check if the server is running                      |
-| GET    | `/api/calories`       | Get all calorie records                             |
-| GET    | `/api/calories/:date` | Get records for a specific date (e.g. `2026-05-13`) |
-| POST   | `/api/calories`       | Add a new calorie record                            |
-| PUT    | `/api/calories/:id`   | Update an existing record by ID                     |
-| DELETE | `/api/calories/:id`   | Delete a record by ID                               |
+| Method | Endpoint                   | Description                                         |
+| ------ | -------------------------- | --------------------------------------------------- |
+| GET    | `/api/check`               | Check if the server is running                      |
+| GET    | `/api/calories`            | Get all calorie records                             |
+| GET    | `/api/calories/:date`      | Get records for a specific date (e.g. `2026-05-13`) |
+| GET    | `/api/calories/record/:id` | Get record detail with a specific id                |
+| POST   | `/api/calories`            | Add a new calorie record                            |
+| PUT    | `/api/calories/:id`        | Update an existing record by ID                     |
+| DELETE | `/api/calories/:id`        | Delete a record by ID                               |
 
 ### POST & PUT Request Body
 

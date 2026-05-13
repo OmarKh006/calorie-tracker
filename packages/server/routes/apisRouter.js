@@ -21,6 +21,22 @@ router.get("/:date", (req, res) => {
   );
 });
 
+router.get("/record/:id", (req, res) => {
+  db.get(
+    "SELECT * FROM calorie_record WHERE id=?",
+    [req.params.id],
+    (err, row) => {
+      if (err) return res.status(500).json({ message: err.message });
+      if (!row) {
+        return res.status(404).json({
+          message: "Record not found",
+        });
+      }
+      res.json(row);
+    },
+  );
+});
+
 router.post("/", (req, res) => {
   const { date, meal, content, calories } = req.body;
   if (!date || !meal || !content || !calories)
