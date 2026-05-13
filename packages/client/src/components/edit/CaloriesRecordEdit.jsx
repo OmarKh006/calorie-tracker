@@ -48,13 +48,8 @@ function formReducer(state, action) {
 }
 
 export default function CaloriesRecordEdit(props) {
-  const {
-    currentDate,
-    isDateValid,
-    currentDateString,
-    setCurrentDate,
-    calories,
-  } = useContext(AppContext);
+  const { isDateValid, currentDateString, setCurrentDate, calories } =
+    useContext(AppContext);
   const [formState, dispatchFn] = useReducer(formReducer, DEFAULT_VALUE);
   const { content: isContentValid, calories: isCaloriesValid } = formState;
 
@@ -103,7 +98,7 @@ export default function CaloriesRecordEdit(props) {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     props.onFormSubmit({
-      date: currentDate,
+      date: currentDateString,
       meal: mealRef.current.value,
       content: contentRef.current.value,
       calories: Number(caloriesRef.current.value),

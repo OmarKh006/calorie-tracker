@@ -5,8 +5,6 @@ import styles from "./TrackPage.module.css";
 import ReactModal from "react-modal";
 import { getDateFromString } from "../../utils/utils";
 
-const LOCAL_STORAGE_KEY = "calorieRecords";
-
 export function TrackPage() {
   const [records, setRecords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,9 +28,22 @@ export function TrackPage() {
     },
   };
 
-  // function saveToLocalStorage() {
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
-  // }
+  async function saveToDB(record) {
+    try {
+      const response = await fetch("/api/calories", {
+        method: "POST",
+        body: JSON.stringify(record),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) throw new Error("Failed to add new record");
+      loadFromDB();
+    } catch (err) {
+      setError(err.message);
+    }
+  }
 
   async function loadFromDB() {
     setLoading(true);
@@ -65,12 +76,7 @@ export function TrackPage() {
   };
 
   const formSubmit = (record) => {
-    const formattedRecord = {
-      ...record,
-      date: record.date,
-      id: crypto.randomUUID(),
-    };
-    setRecords((prevRecord) => [formattedRecord, ...(prevRecord ?? [])]);
+    saveToDB(record);
     handleCloseModal();
   };
 
