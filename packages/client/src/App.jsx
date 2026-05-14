@@ -6,6 +6,7 @@ import {
   PageLayout,
   TrackPage,
 } from "./components/pages";
+import EditPage from "./components/pages/EditPage";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,20 @@ const router = createBrowserRouter([
       },
       {
         path: "track",
-        element: <TrackPage />,
-      },
-      {
-        path: "track/:id",
-        element: <DetailsPage />,
+        children: [
+          {
+            index: true,
+            element: <TrackPage />,
+          },
+          {
+            path: ":id",
+            element: <DetailsPage />,
+          },
+          {
+            path: "create",
+            element: <EditPage />,
+          },
+        ],
       },
     ],
   },
