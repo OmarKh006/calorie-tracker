@@ -6,11 +6,6 @@ import { Link } from "react-router-dom";
 import TextContent from "../common/TextContent";
 
 export default function RecordList(props) {
-  // const totalCalories = (props.records ?? []).reduce(
-  //   (sum, record) => sum + Number(record.calories),
-  //   0,
-  // );
-
   const { calories } = useContext(AppContext);
 
   if (!props.records?.length)
@@ -22,7 +17,7 @@ export default function RecordList(props) {
         {props.records.map((record) => (
           <li className={styles["list-item"]} key={record.id}>
             <Link to={`${record.id}`}>
-              <CalorieRecord record={record} />
+              <CalorieRecord record={record} refresh={props.refresh} />
             </Link>
           </li>
         ))}

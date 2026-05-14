@@ -1,8 +1,8 @@
 import styles from "./CalorieRecord.module.css";
-import DateRecord from "./DateRecord";
 import StyledRecordCell from "../common/StyledRecordCell";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../AppContext";
+import Button from "../common/Button";
 
 function CalorieRecord(props) {
   const { setCalories: addCalories } = useContext(AppContext);
@@ -15,12 +15,18 @@ function CalorieRecord(props) {
     };
   }, []);
 
+  async function deleteRecord(e) {
+    e.preventDefault();
+    const response = await fetch(`/api/calories/${props.record.id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) props.refresh?.();
+  }
+
   return (
     <>
       <ul className={styles.record}>
-        <li>
-          <DateRecord date={props.record.date} />
-        </li>
         <>
           <li>{props.record.meal}</li>
           <li>{props.record.content}</li>
@@ -28,6 +34,9 @@ function CalorieRecord(props) {
             <StyledRecordCell>{props.record.calories}</StyledRecordCell>
           </li>
         </>
+        <Button variant="secondary" onClick={deleteRecord}>
+          Delete
+        </Button>
       </ul>
     </>
   );

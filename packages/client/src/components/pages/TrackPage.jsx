@@ -9,7 +9,7 @@ import TextContent from "../common/TextContent";
 export function TrackPage() {
   const { currentDateString, setCurrentDate } = useContext(AppContext);
 
-  const [records, loading, error] = useLoadData(
+  const [records, loading, error, refreshData] = useLoadData(
     `/api/calories/${currentDateString}`,
   );
 
@@ -17,7 +17,7 @@ export function TrackPage() {
     setCurrentDate(event.target.value);
   };
 
-  let content = <RecordList records={records} />;
+  let content = <RecordList records={records} refresh={refreshData} />;
 
   if (error) content = <TextContent value={error} />;
 
