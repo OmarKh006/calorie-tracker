@@ -1,2 +1,2 @@
 export * from "./useRedirectAfterCountDown";
-export * from "./useLoadDate";
+export * from "./useLoadData";

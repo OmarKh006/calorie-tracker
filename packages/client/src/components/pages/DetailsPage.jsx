@@ -1,32 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import styles from "./DetailsPage.module.css";
-import { useEffect, useState } from "react";
-import { getDateFromString } from "../../utils/utils";
 import TextContent from "../common/TextContent";
+import { useLoadData } from "../../utils/hooks";
 
 export const DetailsPage = () => {
   const params = useParams();
-  const [details, setDetails] = useState(null);
-  const [err, setErr] = useState();
-
-  async function loadDetails(id) {
-    try {
-      const response = await fetch(`/api/calories/record/${id}`);
-      if (!response.ok) throw new Error("Failed to load record details");
-      const data = await response.json();
-
-      setDetails({
-        ...data,
-        date: getDateFromString(data.date).toLocaleDateString(),
-      });
-    } catch (err) {
-      setErr(err.message);
-    }
-  }
-
-  useEffect(() => {
-    loadDetails(params.id);
-  }, []);
+  const [details, _, err] = useLoadData(
+    `/api/calories/record/${params.id}`,
+    "single",
+  );
 
   return err ? (
     <TextContent value={err} />
@@ -35,7 +17,7 @@ export const DetailsPage = () => {
       <div className={styles.container}>
         <div className={styles.item}>
           <p>Date:</p>
-          <p>{details.date}</p>
+          <p>{details.date.toLocaleDateString()}</p>
         </div>
         <div className={styles.item}>
           <p>Meal:</p>

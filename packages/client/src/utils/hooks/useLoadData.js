@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDateFromString } from "../utils";
 
-export function useLoadDate(apiURL) {
+export function useLoadData(apiURL, type = "multiple") {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [records, setRecords] = useState([]);
@@ -15,8 +15,9 @@ export function useLoadDate(apiURL) {
         throw new Error("Error : Data not found 404");
       if (!response.ok) throw new Error("Unknown error occurred");
       const data = await response.json();
+      const result = type === "single" ? [data] : data;
       setRecords(
-        data.map((record) => ({
+        result.map((record) => ({
           ...record,
           date: getDateFromString(record.date),
         })),
@@ -32,5 +33,5 @@ export function useLoadDate(apiURL) {
     loadFromDB();
   }, []);
 
-  return [records, loading, error, loadFromDB];
+  return [type === "single" ? records[0] : records, loading, error, loadFromDB];
 }

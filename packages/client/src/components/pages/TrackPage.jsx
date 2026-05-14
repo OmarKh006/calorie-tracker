@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CaloriesRecordEdit from "../edit/CaloriesRecordEdit";
 import ListingSection from "../calorieRecordsSection/ListingSection";
 import styles from "./TrackPage.module.css";
 import ReactModal from "react-modal";
-import { useLoadDate } from "../../utils/hooks";
+import { useLoadData } from "../../utils/hooks";
 
 export function TrackPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [records, loading, error, refreshData] = useLoadDate("/api/calories");
+  const [records, loading, error, refreshData] = useLoadData("/api/calories");
 
   const modalStyles = {
     content: {
