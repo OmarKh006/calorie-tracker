@@ -5,6 +5,7 @@ import {
   useRef,
   useCallback,
   useMemo,
+  useState,
 } from "react";
 import styles from "./EditPage.module.css";
 import { AppContext } from "../../AppContext";
@@ -55,12 +56,11 @@ export default function EditPage() {
   const { content: isContentValid, calories: isCaloriesValid } = formState;
   const navigate = useNavigate();
 
+  const [error, setError] = useState(null);
+
   const contentRef = useRef();
   const caloriesRef = useRef();
   const mealRef = useRef();
-
-  // const isFormValid =
-  //   mealRecord.date && mealRecord.content && mealRecord.calories > 0;
 
   const isFormValid = useMemo(() => {
     return isDateValid && isContentValid && isCaloriesValid;
@@ -112,6 +112,7 @@ export default function EditPage() {
   }, []);
 
   async function saveToDB(record) {
+    setError(null);
     try {
       const response = await fetch("/api/calories", {
         method: "POST",
@@ -124,13 +125,13 @@ export default function EditPage() {
       if (!response.ok) throw new Error("Failed to add new record");
       navigate("..");
     } catch (err) {
-      console.log(err);
+      setError(err.message);
     }
   }
 
   return (
     <form className={styles.form} onSubmit={onSubmitHandler}>
-      <p className={styles.warning}>You have spent {calories} calories</p>
+      {error && <p className={styles.warning}>Request failed, {error}</p>}
       <FormInput
         label="Date"
         type="date"
