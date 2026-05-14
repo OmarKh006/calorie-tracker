@@ -6,30 +6,28 @@
   text-align: center;
 }
 
-.open-modal-button {
+.add-button {
   background-color: var(--theme-color-normal);
   color: var(--theme-background-light);
   border: none;
   display: block;
   border-radius: var(--form-border-radius);
-  padding: 10px;
+  padding: 0 10px;
   cursor: pointer;
-  flex-grow: 1;
-  width: 100%;
-  max-width: 225px;
-  margin: auto;
+  width: 150px;
   text-align: center;
   text-decoration: none;
+  line-height: 40px;
 }
 
 .listing-picker-label {
   color: var(--theme-color-dark);
   line-height: 40px;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .listing-picker-input {
-  margin: 20px;
   background-color: var(--theme-background-light);
   color: var(--theme-color-normal);
   border: 1px solid var(--theme-color-normal);
@@ -37,7 +35,17 @@
   border-radius: 5px;
   width: 100%;
   max-width: 225px;
-  margin-bottom: 20px;
   font-size: 16px;
   box-sizing: border-box;
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.listPicker {
+  display: flex;
+  align-items: center;
 }

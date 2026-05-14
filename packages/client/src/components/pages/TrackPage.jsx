@@ -26,20 +26,27 @@ export function TrackPage() {
   return (
     <>
       <h1 className={styles.title}>Calories Tracker</h1>
-      <label className={styles["listing-picker-label"]} htmlFor="listingDate">
-        Select Date:
-      </label>
-      <input
-        className={styles["listing-picker-input"]}
-        type="date"
-        id="listingDate"
-        value={currentDateString}
-        onChange={onDateChangeHandler}
-      />
+      <div className={styles.headerWrapper}>
+        <div className={styles.listPicker}>
+          <label
+            className={styles["listing-picker-label"]}
+            htmlFor="listingDate"
+          >
+            Select Date:
+          </label>
+          <input
+            className={styles["listing-picker-input"]}
+            type="date"
+            id="listingDate"
+            value={currentDateString}
+            onChange={onDateChangeHandler}
+          />
+        </div>
+        <Link className={styles["add-button"]} to="create">
+          Track Food
+        </Link>
+      </div>
       {content}
-      <Link className={styles["open-modal-button"]} to="create">
-        Track Food
-      </Link>
     </>
   );
 }
